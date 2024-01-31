@@ -1,10 +1,10 @@
-'use client' 
+'use client';
 import { useState } from 'react';
 import {
-  IconHome,
-  IconClipboardList ,
-  IconMessage,
-  IconUser,
+    IconHome,
+    IconClipboardList,
+    IconMessage,
+    IconUser,
 } from '@tabler/icons-react';
 import classes from './Navbar.module.css';
 import Image from 'next/image';
@@ -13,38 +13,43 @@ import { Group } from '@mantine/core';
 
 const data = [
     { link: '', label: 'Inicio', icon: IconHome },
-    { link: '', label: 'Pacientes', icon: IconClipboardList  },
+    { link: '', label: 'Pacientes', icon: IconClipboardList },
     { link: '', label: 'Soporte', icon: IconMessage },
     { link: '', label: 'Profile', icon: IconUser },
 ];
 
 export function Navbar() {
-  const [active, setActive] = useState('Billing');
+    const [active, setActive] = useState('Billing');
 
-  const links = data.map((item) => (
-    <Link
-      className={classes.link}
-      data-active={item.label === active || undefined}
-      href={item.link}
-      key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
-      }}
-    >
-      <item.icon className={classes.linkIcon} stroke={1.5} />
-      <span>{item.label}</span>
-    </Link>
-  ));
+    const links = data.map((item) => (
+        <Link
+            className={classes.link}
+            data-active={item.label === active || undefined}
+            href={item.link}
+            key={item.label}
+            onClick={(event) => {
+                event.preventDefault();
+                setActive(item.label);
+            }}
+        >
+            <item.icon className={classes.linkIcon} stroke={1.5} />
+            <span>{item.label}</span>
+        </Link>
+    ));
 
-  return (
-    <nav className={classes.navbar}>
-      <div className={classes.navbarMain}>
-        <Group className={classes.header} justify="space-between">
-          <Image src="/wave.svg" alt="Wave Alineadores Invisibles" width={200} height={125} />
-        </Group>
-        {links}
-      </div>
-    </nav>
-  );
+    return (
+        <nav className={classes.navbar}>
+            <div className={classes.navbarMain}>
+                <Group className={classes.header} justify='space-between'>
+                    <Image
+                        src='/wave.svg'
+                        alt='Wave Alineadores Invisibles'
+                        width={200}
+                        height={125}
+                    />
+                </Group>
+                {links}
+            </div>
+        </nav>
+    );
 }
