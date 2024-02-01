@@ -1,3 +1,5 @@
+import Paciente from "./components/Paciente/Paciente";
+
 interface PacientePageProps {
     params: {
         id: string;
@@ -7,10 +9,7 @@ interface PacientePageProps {
 const PacientePage = (props: PacientePageProps) => {
     const { id } = props.params;
     return (
-        <div>
-            <h1>PacientePage</h1>
-            <p>id: {id}</p>
-        </div>
+            <Paciente id={id} />
     );
 };
 export default PacientePage;

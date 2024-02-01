@@ -16,7 +16,6 @@ const PacientesTabla = () => {
     const rows = elements.map((element) => (
         <Table.Tr key={element.name}>
             <Table.Td>
-                {' '}
                 <Badge
                     color={
                         element.status === 'Activo'
