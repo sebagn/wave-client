@@ -13,13 +13,13 @@ import { Group } from '@mantine/core';
 
 const data = [
     { link: '', label: 'Inicio', icon: IconHome },
-    { link: '', label: 'Pacientes', icon: IconClipboardList },
+    { link: '/dashboard', label: 'Pacientes', icon: IconClipboardList },
     { link: '', label: 'Soporte', icon: IconMessage },
     { link: '', label: 'Profile', icon: IconUser },
 ];
 
 export function Navbar() {
-    const [active, setActive] = useState('Billing');
+    const [active, setActive] = useState('Inicio');
 
     const links = data.map((item) => (
         <Link
@@ -27,8 +27,7 @@ export function Navbar() {
             data-active={item.label === active || undefined}
             href={item.link}
             key={item.label}
-            onClick={(event) => {
-                event.preventDefault();
+            onClick={() => {
                 setActive(item.label);
             }}
         >

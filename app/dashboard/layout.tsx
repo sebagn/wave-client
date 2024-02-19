@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { Navbar } from './components/navbar/Navbar';
-import { Container, Flex, Grid, Stack } from '@mantine/core';
+import { Container, Flex, Stack } from '@mantine/core';
 
 const DashboardLayout: React.FC = ({ children }: any) => {
     return (

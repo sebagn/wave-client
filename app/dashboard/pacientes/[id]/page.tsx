@@ -1,4 +1,6 @@
-import Paciente from "./components/Paciente/Paciente";
+import { getEtapaById } from '../../../_services/etapas';
+import { getPatientById } from '../../../_services/pacientes';
+import Paciente from './_components/Paciente/Paciente';
 
 interface PacientePageProps {
     params: {
@@ -6,10 +8,20 @@ interface PacientePageProps {
     };
 }
 
-const PacientePage = (props: PacientePageProps) => {
+const PacientePage = async (props: PacientePageProps) => {
     const { id } = props.params;
-    return (
-            <Paciente id={id} />
+
+    const pacienteData = await getPatientById(id);
+
+    if (pacienteData.etapas.length === 0) {
+        return <div>El paciente no tiene etapas.</div>;
+    }
+
+    const etapasLen = pacienteData.etapas.length;
+    const etapaData = await getEtapaById(
+        pacienteData.etapas[etapasLen - 1]._id
     );
+
+    return <Paciente pac={pacienteData} etapa={etapaData} />;
 };
 export default PacientePage;

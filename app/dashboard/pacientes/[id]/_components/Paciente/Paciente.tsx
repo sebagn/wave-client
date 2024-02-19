@@ -1,32 +1,39 @@
 'use client';
-import { Flex, Grid, Stack, Text, Title, rem } from '@mantine/core';
+import { Box, Flex, Grid, Stack, Text, Title, rem } from '@mantine/core';
 import Image from 'next/image';
 import classes from './Paciente.module.css';
 
-const pacienteData = {
-    id: '123',
-    nombre: 'Fulano',
-    apellido: 'De Tal',
-    edad: 30,
-    genero: 'M',
-    descripcion: {
-        sup: 10,
-        inf: 12,
-    },
-    attaches: 'https://placehold.co/600x400/jpg',
-    ipr: {
-        sup: 'https://placehold.co/600x400/jpg',
-        inf: 'https://placehold.co/600x400/jpg',
-    },
-    observaciones:
-        'Las observaciones son las siguientes Lorem ipsum dolor sit amet consectetur adipisicing elit. Quam obcaecati ut quis sapiente cupiditate recusandae, inventore voluptatum iusto repellat illum nihil dolorum at fugit dignissimos itaque illo numquam ipsa eius.',
-    fecha: '12/12/2021',
-    status: 'Activo',
-};
+interface PacienteProps {
+    codigo: number;
+    nombre: string;
+    apellido: string;
+    dni: number;
+    edad?: number;
+    genero?: string;
+    etapas: EtapaProps[];
+}
+interface EtapaProps {
+    _id: string;
+    numeroEtapa: number;
+    diagnostico: string;
+    planTratamiento: string;
+    ipr: string[];
+    fotos: string[];
+    rx: string[];
+    escaneos: string[];
+    attaches: string[];
+    observaciones: string;
+    alineadoresSup: number;
+    alineadoresInf: number;
+}
 
-const Paciente = ({ id }: { id: string }) => {
-    const PRIMARY_COL_HEIGHT = rem(300);
-    const SECONDARY_COL_HEIGHT = `calc(${PRIMARY_COL_HEIGHT} / 2 - var(--mantine-spacing-md) / 2)`;
+const Paciente = ({
+    pac,
+    etapa,
+}: {
+    pac: PacienteProps;
+    etapa: EtapaProps;
+}) => {
     return (
         <Flex justify={'flex-start'} w={'100%'}>
             <Grid w={'100%'}>
@@ -35,49 +42,50 @@ const Paciente = ({ id }: { id: string }) => {
                     <h2 className={classes.title}>
                         Nombre:{' '}
                         <span className={classes.text}>
-                            {pacienteData.nombre} {pacienteData.apellido}
+                            {pac.nombre} {pac.apellido}
                         </span>
                     </h2>
                     <h2 className={classes.title}>
-                        Edad:{' '}
-                        <span className={classes.text}>
-                            {pacienteData.edad}
-                        </span>
+                        Edad: <span className={classes.text}>{pac.edad}</span>
                     </h2>
                     <h2 className={classes.title}>
                         Genero:{' '}
-                        <span className={classes.text}>
-                            {pacienteData.genero}
-                        </span>
+                        <span className={classes.text}>{pac.genero}</span>
                     </h2>
                     <h2 className={classes.title}>
                         Alineadores Superior:{' '}
                         <span className={classes.text}>
-                            {pacienteData.descripcion.sup}
+                            {etapa.alineadoresSup}
                         </span>
                     </h2>
                     <h2 className={classes.title}>
                         Alineadores inferior:{' '}
                         <span className={classes.text}>
-                            {pacienteData.descripcion.inf}
+                            {etapa.alineadoresInf}
                         </span>
                     </h2>
                     <h2 className={classes.title}>
                         Observaciones:{' '}
                         <span className={classes.text}>
-                            {pacienteData.observaciones}
+                            {etapa.observaciones}
                         </span>
                     </h2>
                 </Grid.Col>
                 <Grid.Col px={20} span={8}>
                     <Stack align='center'>
                         <Title>Attachments</Title>
-                        <Image
-                            src={pacienteData.attaches}
-                            alt='Attaches'
-                            width={600}
-                            height={400}
-                        />
+                        <Box
+                            className={classes.image}
+                            style={{ width: '50%', height: '50%' }}
+                        >
+                            <Image
+                                src={etapa.attaches[0]}
+                                alt='Attaches'
+                                width={600}
+                                height={300}
+                                style={{ objectFit: 'contain' }}
+                            />
+                        </Box>
                         <Title>IPR</Title>
                         <Flex
                             direction={'row'}
@@ -85,16 +93,18 @@ const Paciente = ({ id }: { id: string }) => {
                             gap={10}
                         >
                             <Image
-                                src={pacienteData.ipr.sup}
+                                src={etapa.ipr[0]}
                                 alt='IPR Superior'
                                 width={300}
-                                height={200}
+                                height={300}
+                                style={{ objectFit: 'contain' }}
                             />
                             <Image
-                                src={pacienteData.ipr.inf}
+                                src={etapa.ipr[1]}
                                 alt='IPR Inferior'
                                 width={300}
-                                height={200}
+                                height={300}
+                                style={{ objectFit: 'contain' }}
                             />
                         </Flex>
                     </Stack>
