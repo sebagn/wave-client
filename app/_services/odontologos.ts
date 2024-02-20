@@ -1,6 +1,6 @@
 import { urls } from './urls';
 
-export const getEtapas = async () => {
+export const getOdontologos = async () => {
     try {
         const response = await fetch(urls.pacientes.all);
         return response.json();
@@ -9,9 +9,9 @@ export const getEtapas = async () => {
     }
 };
 
-export const getEtapaById = async (id: string) => {
+export const getOdontologoById = async (id: string) => {
     try {
-        const response = await fetch(`${urls.etapas.all}/${id}`);
+        const response = await fetch(`${urls.pacientes.all}/${id}`);
         return response.json();
     } catch (error) {
         console.error(error);

@@ -7,4 +7,7 @@ export const urls = {
     etapas: {
         all: `${env.api.url}/etapas`,
     },
+    odontologos: {
+        all: `${env.api.url}/odontologos`,
+    },
 };

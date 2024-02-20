@@ -1,5 +1,16 @@
 'use client';
-import { Box, Flex, Grid, Stack, Text, Title, rem } from '@mantine/core';
+import {
+    Box,
+    Center,
+    Container,
+    Flex,
+    Grid,
+    Group,
+    Stack,
+    Text,
+    Title,
+    rem,
+} from '@mantine/core';
 import Image from 'next/image';
 import classes from './Paciente.module.css';
 
@@ -35,49 +46,47 @@ const Paciente = ({
     etapa: EtapaProps;
 }) => {
     return (
-        <Flex justify={'flex-start'} w={'100%'}>
-            <Grid w={'100%'}>
-                <Grid.Col px={20} span={4}>
-                    <h1 className={classes.title1}>INFORME 2</h1>
-                    <h2 className={classes.title}>
-                        Nombre:{' '}
-                        <span className={classes.text}>
-                            {pac.nombre} {pac.apellido}
-                        </span>
-                    </h2>
-                    <h2 className={classes.title}>
-                        Edad: <span className={classes.text}>{pac.edad}</span>
-                    </h2>
-                    <h2 className={classes.title}>
-                        Genero:{' '}
-                        <span className={classes.text}>{pac.genero}</span>
-                    </h2>
-                    <h2 className={classes.title}>
-                        Alineadores Superior:{' '}
-                        <span className={classes.text}>
-                            {etapa.alineadoresSup}
-                        </span>
-                    </h2>
-                    <h2 className={classes.title}>
-                        Alineadores inferior:{' '}
-                        <span className={classes.text}>
-                            {etapa.alineadoresInf}
-                        </span>
-                    </h2>
-                    <h2 className={classes.title}>
+        <Stack w={'100%'}>
+            <div className={classes.container}>
+                <Title order={1} className={classes.title1}>
+                    INFORME 2 - ETAPA {etapa.numeroEtapa}
+                </Title>
+                <h3 className={classes.title}>
+                    Nombre:{' '}
+                    <span className={classes.text}>
+                        {pac.nombre} {pac.apellido}
+                    </span>
+                </h3>
+                <h3 className={classes.title}>
+                    Edad: <span className={classes.text}>{pac.edad}</span>
+                </h3>
+                <h3 className={classes.title}>
+                    Genero: <span className={classes.text}>{pac.genero}</span>
+                </h3>
+                <h3 className={classes.title}>
+                    Alineadores Superior:{' '}
+                    <span className={classes.text}>{etapa.alineadoresSup}</span>
+                </h3>
+                <h3 className={classes.title}>
+                    Alineadores inferior:{' '}
+                    <span className={classes.text}>{etapa.alineadoresInf}</span>
+                </h3>
+                <div className={classes.observaciones}>
+                    <h3 className={classes.title}>
                         Observaciones:{' '}
                         <span className={classes.text}>
                             {etapa.observaciones}
                         </span>
-                    </h2>
-                </Grid.Col>
-                <Grid.Col px={20} span={8}>
-                    <Stack align='center'>
-                        <Title>Attachments</Title>
-                        <Box
-                            className={classes.image}
-                            style={{ width: '50%', height: '50%' }}
-                        >
+                    </h3>
+                </div>
+            </div>
+            <Box px={20}>
+                <Group justify='space-evenly'>
+                    <Stack>
+                        <Title order={2} className={classes.title1}>
+                            Attachments
+                        </Title>
+                        <Center className={classes.image}>
                             <Image
                                 src={etapa.attaches[0]}
                                 alt='Attaches'
@@ -85,12 +94,17 @@ const Paciente = ({
                                 height={300}
                                 style={{ objectFit: 'contain' }}
                             />
-                        </Box>
-                        <Title>IPR</Title>
+                        </Center>
+                    </Stack>
+                    <Stack>
+                        <Title order={2} className={classes.title1}>
+                            IPR
+                        </Title>
                         <Flex
                             direction={'row'}
                             justify={'space-between'}
                             gap={10}
+                            className={classes.image}
                         >
                             <Image
                                 src={etapa.ipr[0]}
@@ -108,9 +122,9 @@ const Paciente = ({
                             />
                         </Flex>
                     </Stack>
-                </Grid.Col>
-            </Grid>
-        </Flex>
+                </Group>
+            </Box>
+        </Stack>
     );
 };
 export default Paciente;

@@ -1,5 +1,6 @@
 .navbar {
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     width: rem(250px);
     padding: var(--mantine-spacing-md);
     display: flex;
@@ -19,6 +20,7 @@
         light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-4));
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 10px;
 }
 
@@ -27,7 +29,7 @@
     align-items: center;
     text-decoration: none;
     font-size: var(--mantine-font-size-sm);
-    color: black;
+    color: var(--mantine-color-dark-4);
     padding: var(--mantine-spacing-sm) var(--mantine-spacing-sm);
     border-radius: var(--mantine-radius-sm);
     font-weight: 500;
@@ -54,10 +56,10 @@
         &,
         &:hover {
             background-color: var(--mantine-color-blue-light);
-            color: var(--mantine-color-blue-light-color);
+            color: var(--mantine-color-dark-4);
 
             .linkIcon {
-                color: var(--mantine-color-blue-light-color);
+                color: var(--mantine-color-dark-4);
             }
         }
     }

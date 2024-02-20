@@ -14,7 +14,7 @@ const DashboardLayout: React.FC = ({ children }: any) => {
             <Container px={0} size={250} m={0}>
                 <Navbar />
             </Container>
-            <Stack mx={0} my={20} w={'100%'}>
+            <Stack mx={0} my={20} w={'100%'} p={25}>
                 <Container> HEADER </Container>
                 {children}
             </Stack>

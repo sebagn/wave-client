@@ -22,22 +22,26 @@ interface PacientesTablaProps {
 const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
     const rows = pacientes.map(
         (element) => (
+            
+            // Formatear mejor la fecha
             (element.updatedAt = new Date(
                 element.updatedAt
-            ).toLocaleDateString()),
+            ).toDateString()),
+
             (
                 <Table.Tr key={element.nombre}>
                     <Table.Td>
                         <Badge
                             color={
-                                element.estado === 'Activo'
-                                    ? 'teal'
+                                // refactorizar mejor 
+                                element.estado === 'Esperando documentación'
+                                    ? 'red'
                                     : element.estado === 'En planificación'
                                     ? 'blue'
                                     : element.estado === 'Finalizado'
-                                    ? 'green'
+                                    ? 'gray'
                                     : element.estado === 'En fabricación'
-                                    ? 'pink'
+                                    ? 'green'
                                     : 'gray'
                             }
                         >
