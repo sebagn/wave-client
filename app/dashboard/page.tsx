@@ -6,7 +6,7 @@ import PacientesTabla from './components/PacientesTabla.tsx/PacientesTabla';
 const DashboardPage = () => {
     return (
         <Container
-        m={10}>
+        m={10} w={'100%'}>
             <Flex
                 justify='space-around'
                 align='center'
@@ -14,7 +14,7 @@ const DashboardPage = () => {
             >
                 <Button
                     component={Link}
-                    href='/crear'
+                    href='/dashboard/pacientes/nuevo'
                     variant='light'
                     color='blue'
                     radius='md'
@@ -24,7 +24,7 @@ const DashboardPage = () => {
                 </Button>
                 <Button
                     component={Link}
-                    href='/pacientes'
+                    href='/dashboard'
                     variant='light'
                     color='blue'
                     radius='md'

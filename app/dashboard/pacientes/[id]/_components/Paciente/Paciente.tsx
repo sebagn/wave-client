@@ -12,6 +12,8 @@ import {
     rem,
 } from '@mantine/core';
 import Image from 'next/image';
+
+import GrupoFotos from '../GrupoFotos/GrupoFotos';
 import classes from './Paciente.module.css';
 
 interface PacienteProps {
@@ -45,6 +47,7 @@ const Paciente = ({
     pac: PacienteProps;
     etapa: EtapaProps;
 }) => {
+    console.log(etapa.fotos);
     return (
         <Stack w={'100%'}>
             <div className={classes.container}>
@@ -64,11 +67,11 @@ const Paciente = ({
                     Genero: <span className={classes.text}>{pac.genero}</span>
                 </h3>
                 <h3 className={classes.title}>
-                    Alineadores Superior:{' '}
+                    Alineadores superiores:{' '}
                     <span className={classes.text}>{etapa.alineadoresSup}</span>
                 </h3>
                 <h3 className={classes.title}>
-                    Alineadores inferior:{' '}
+                    Alineadores inferiores:{' '}
                     <span className={classes.text}>{etapa.alineadoresInf}</span>
                 </h3>
                 <div className={classes.observaciones}>
@@ -82,46 +85,52 @@ const Paciente = ({
             </div>
             <Box px={20}>
                 <Group justify='space-evenly'>
-                    <Stack>
-                        <Title order={2} className={classes.title1}>
-                            Attachments
-                        </Title>
-                        <Center className={classes.image}>
-                            <Image
-                                src={etapa.attaches[0]}
-                                alt='Attaches'
-                                width={600}
-                                height={300}
-                                style={{ objectFit: 'contain' }}
-                            />
-                        </Center>
-                    </Stack>
-                    <Stack>
-                        <Title order={2} className={classes.title1}>
-                            IPR
-                        </Title>
-                        <Flex
-                            direction={'row'}
-                            justify={'space-between'}
-                            gap={10}
-                            className={classes.image}
-                        >
-                            <Image
-                                src={etapa.ipr[0]}
-                                alt='IPR Superior'
-                                width={300}
-                                height={300}
-                                style={{ objectFit: 'contain' }}
-                            />
-                            <Image
-                                src={etapa.ipr[1]}
-                                alt='IPR Inferior'
-                                width={300}
-                                height={300}
-                                style={{ objectFit: 'contain' }}
-                            />
-                        </Flex>
-                    </Stack>
+                    {etapa.attaches.length > 0 && (
+                        <Stack>
+                            <Title order={2} className={classes.title1}>
+                                Attachments
+                            </Title>
+                            <Center className={classes.image}>
+                                <Image
+                                    src={etapa.attaches[0]}
+                                    alt='Attaches'
+                                    width={600}
+                                    height={300}
+                                    style={{ objectFit: 'contain' }}
+                                />
+                            </Center>
+                        </Stack>
+                    )}
+                    {etapa.ipr.length > 0 && (
+                        <Stack>
+                            <Title order={2} className={classes.title1}>
+                                IPR
+                            </Title>
+                            <Flex
+                                direction={'row'}
+                                justify={'space-between'}
+                                gap={10}
+                                className={classes.image}
+                            >
+                                <Image
+                                    src={etapa.ipr[0]}
+                                    alt='IPR Superior'
+                                    width={300}
+                                    height={300}
+                                    style={{ objectFit: 'contain' }}
+                                />
+                                <Image
+                                    src={etapa.ipr[1]}
+                                    alt='IPR Inferior'
+                                    width={300}
+                                    height={300}
+                                    style={{ objectFit: 'contain' }}
+                                />
+                            </Flex>
+                        </Stack>
+                    )}
+                    {etapa.fotos.length > 0 && <GrupoFotos etapa={etapa} modulo='Fotografías' />}
+                    {etapa.rx.length > 0 && <GrupoFotos etapa={etapa} modulo='Radiografías' />}
                 </Group>
             </Box>
         </Stack>
