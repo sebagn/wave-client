@@ -1,4 +1,4 @@
-'use client';
+'use server';
 import React from 'react';
 import { Navbar } from './components/navbar/Navbar';
 import { Container, Flex, Stack } from '@mantine/core';

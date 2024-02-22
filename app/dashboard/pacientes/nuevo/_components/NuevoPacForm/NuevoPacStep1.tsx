@@ -1,27 +1,27 @@
 import {
-    TextInput,
     Button,
-    Textarea,
     Center,
+    NumberInput,
     Select,
     SimpleGrid,
-    NumberInput,
+    TextInput,
+    Textarea,
 } from '@mantine/core';
-import { useForm } from '@mantine/form';
 import classes from './NuevoPacStep1.module.css';
-import { createPaciente } from '../../../../../_services/pacientes';
-import { addEtapa, createEtapa } from '../../../../../_services/etapas';
+import { useForm } from '@mantine/form';
+import { createPaciente, updatePaciente } from '@services/pacientes';
+import { addEtapa, createEtapa } from '@services/etapas';
 
-export default function NuevoPacStep1({setEtapaId}) {
+export default function NuevoPacStep1({ setEtapaId, pac, etapa }) {
     const form = useForm({
         initialValues: {
-            nombre: '',
-            apellido: '',
-            dni: '',
-            edad: '',
-            sexo: '',
-            diagnostico: '',
-            planTratamiento: '',
+            nombre: pac.nombre || '',
+            apellido: pac.apellido || '',
+            dni: pac.dni || '',
+            edad: pac.edad || '',
+            sexo: pac.sexo || '',
+            diagnostico: etapa.diagnostico || '',
+            planTratamiento: etapa.planTratamiento || '',
         },
 
         validate: {},
@@ -29,19 +29,19 @@ export default function NuevoPacStep1({setEtapaId}) {
 
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const paciente = await createPaciente(form.values);
-
         let etapa;
+
+        const paciente = !pac
+            ? await createPaciente(form.values)
+            : await updatePaciente(pac._id, form.values);
+
         if (!!paciente) {
             etapa = await createEtapa(form.values);
         }
-
         if (!!etapa) {
             await addEtapa(etapa._id, paciente._id);
         }
         setEtapaId(etapa._id);
-
-        console.log('success', paciente, etapa);
     };
 
     return (

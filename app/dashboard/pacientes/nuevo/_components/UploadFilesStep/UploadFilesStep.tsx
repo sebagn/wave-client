@@ -1,7 +1,7 @@
 import { Button, Container, FileInput, Flex, Stack } from '@mantine/core';
 import React, { use, useEffect, useState } from 'react';
 import Image from 'next/image';
-import { addFiles } from '../../../../../_services/etapas';
+import { addFiles } from '@services/etapas';
 import { useForm } from '@mantine/form';
 
 interface UploadFilesProps {
@@ -29,20 +29,18 @@ export default function UploadFiles({
     useEffect(() => {
         return () => {
             setPreview([]);
-            console.log(form.values.files);
         };
     }, [module]);
 
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        console.log(id);
         form.values.files.forEach(async (file) => {
             const formData = new FormData();
             formData.append('file', file);
             const response = await addFiles(formData, id, module);
             if (response) {
-                console.log('success', response);
+                console.log('success');
             }
         });
         form.reset()

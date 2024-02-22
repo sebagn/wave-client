@@ -1,28 +1,17 @@
-'use client';
-import {
-    Box,
-    Center,
-    Container,
-    Flex,
-    Grid,
-    Group,
-    Stack,
-    Text,
-    Title,
-    rem,
-} from '@mantine/core';
+import { Box, Button, Center, Flex, Group, Stack, Title } from '@mantine/core';
+import Link from 'next/link';
 import Image from 'next/image';
-
 import GrupoFotos from '../GrupoFotos/GrupoFotos';
 import classes from './Paciente.module.css';
 
 interface PacienteProps {
-    codigo: number;
+    _id: string;
     nombre: string;
     apellido: string;
     dni: number;
     edad?: number;
     genero?: string;
+    estado: string;
     etapas: EtapaProps[];
 }
 interface EtapaProps {
@@ -47,9 +36,10 @@ const Paciente = ({
     pac: PacienteProps;
     etapa: EtapaProps;
 }) => {
-    console.log(etapa.fotos);
+
     return (
         <Stack w={'100%'}>
+          
             <div className={classes.container}>
                 <Title order={1} className={classes.title1}>
                     INFORME 2 - ETAPA {etapa.numeroEtapa}
@@ -83,6 +73,7 @@ const Paciente = ({
                     </h3>
                 </div>
             </div>
+
             <Box px={20}>
                 <Group justify='space-evenly'>
                     {etapa.attaches.length > 0 && (
@@ -129,10 +120,25 @@ const Paciente = ({
                             </Flex>
                         </Stack>
                     )}
-                    {etapa.fotos.length > 0 && <GrupoFotos etapa={etapa} modulo='Fotografías' />}
-                    {etapa.rx.length > 0 && <GrupoFotos etapa={etapa} modulo='Radiografías' />}
+                    {etapa.fotos.length > 0 && (
+                        <GrupoFotos etapa={etapa} modulo='Fotografías' />
+                    )}
+                    {etapa.rx.length > 0 && (
+                        <GrupoFotos etapa={etapa} modulo='Radiografías' />
+                    )}
                 </Group>
             </Box>
+              {pac.estado === 'Esperando documentación' && (
+                <Center>
+                    <Button
+                        component={Link}
+                        href={`/dashboard/pacientes/nuevo/${pac._id}/etapa/${etapa._id}`}
+                        color='red'
+                    >
+                        Cargar mas documentación
+                    </Button>
+                </Center>
+            )}
         </Stack>
     );
 };

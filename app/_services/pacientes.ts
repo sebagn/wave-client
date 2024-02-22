@@ -1,3 +1,5 @@
+'use server';
+
 import { urls } from './urls';
 
 export const getPacientes = async () => {
@@ -12,7 +14,8 @@ export const getPacientes = async () => {
 export const getPatientById = async (id: string) => {
     try {
         const response = await fetch(`${urls.pacientes.all}/${id}`);
-        return response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
@@ -25,7 +28,7 @@ export const createPaciente = async (formData: any) => {
         dni: formData.dni,
         edad: formData.edad,
         sexo: formData.sexo,
-       };
+    };
 
     try {
         const response = await fetch(urls.pacientes.all, {
@@ -35,7 +38,32 @@ export const createPaciente = async (formData: any) => {
             },
             body: JSON.stringify(pacienteData),
         });
-        return response.json();
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const updatePaciente = async (id: string, formData: any) => {
+    const pacienteData = {
+        nombre: formData.nombre,
+        apellido: formData.apellido,
+        dni: formData.dni,
+        edad: formData.edad,
+        sexo: formData.sexo,
+    };
+
+    try {
+        const response = await fetch(`${urls.pacientes.all}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(pacienteData),
+        });
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }

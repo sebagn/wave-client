@@ -1,3 +1,4 @@
+'use server';
 import { urls } from './urls';
 
 export const getEtapas = async () => {
@@ -12,7 +13,8 @@ export const getEtapas = async () => {
 export const getEtapaById = async (id: string) => {
     try {
         const response = await fetch(`${urls.etapas.all}/${id}`);
-        return response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
@@ -34,7 +36,8 @@ export const createEtapa = async (formData: any) => {
             body: JSON.stringify(etapaData),
         });
 
-        return response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
@@ -55,20 +58,28 @@ export const addEtapa = async (idEtapa: string, idPaciente: string) => {
                 body: JSON.stringify(etapaData),
             }
         );
-        return response.json();
+        const data = await response.json();
+        return data;
     } catch (error) {
         console.error(error);
     }
 };
 
-export const addFiles = async (formData: FormData, idEtapa: string, module: string) => {
+export const addFiles = async (
+    formData: FormData,
+    idEtapa: string,
+    module: string
+) => {
     console.log(formData.get('file'));
 
     try {
-        const response = await fetch(`${urls.etapas.all}/${idEtapa}/${module}`, {
-            method: 'PUT',
-            body:formData,
-        });
+        const response = await fetch(
+            `${urls.etapas.all}/${idEtapa}/${module}`,
+            {
+                method: 'PUT',
+                body: formData,
+            }
+        );
         return response.json();
     } catch (error) {
         console.error(error);
