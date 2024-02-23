@@ -48,7 +48,7 @@ const handleColor = (estado: string) => {
 };
 
 const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
-    const rows = pacientes.map(
+    const rows = pacientes?.map(
         (element) => (
             // Formatear mejor la fecha
             (element.updatedAt = new Date(element.updatedAt).toDateString()),
@@ -102,7 +102,7 @@ const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
                     <TableTh>Acciones</TableTh>
                 </TableTr>
             </TableThead>
-            <TableTbody>{rows}</TableTbody>
+            <TableTbody>{pacientes ? rows: <p>No hay pacientes aún.</p>}</TableTbody>
         </Table>
     );
 };
