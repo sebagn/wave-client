@@ -3,12 +3,10 @@ import {
     Text,
     SimpleGrid,
     UnstyledButton,
-    Anchor,
     Group,
-    useMantineTheme,
 } from '@mantine/core';
 import classes from './page.module.css';
-import { IconClipboardHeart, IconSchool, IconUser } from '@tabler/icons-react';
+import { IconSchool, IconUser } from '@tabler/icons-react';
 import Link from 'next/link';
 
 const mockdata = [

@@ -12,7 +12,7 @@ import { useForm } from '@mantine/form';
 import { createPaciente, updatePaciente } from '@services/pacientes';
 import { addEtapa, createEtapa } from '@services/etapas';
 
-export default function NuevoPacStep1({ setEtapaId, pac, etapa }) {
+export default function NuevoPacStep1({ setEtapaId, pac, etapa }: any) {
     const form = useForm({
         initialValues: {
             nombre: pac? pac.nombre : '',

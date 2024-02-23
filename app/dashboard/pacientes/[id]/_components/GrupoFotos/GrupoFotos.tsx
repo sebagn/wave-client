@@ -23,7 +23,7 @@ export default function GrupoFotos({
                 gap={25}
                 wrap={'wrap'}
             >
-                {data.map((imagen, index) => (
+                {data.map((imagen: any, index: number) => (
                     <Image
                         key={index}
                         src={imagen}
