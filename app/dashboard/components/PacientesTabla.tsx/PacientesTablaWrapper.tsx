@@ -1,8 +1,19 @@
 'use client';
-import { Badge, Button, Table } from '@mantine/core';
+import {
+    Badge,
+    Button,
+    Table,
+    TableTbody,
+    TableTd,
+    TableTh,
+    TableThead,
+    TableTr,
+} from '@mantine/core';
+import { handleDelete } from '_common/utils/handleDelete';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-interface PacientesTablaProps {
+export interface PacientesTablaProps {
     pacientes: [
         {
             estado: string;
@@ -19,79 +30,79 @@ interface PacientesTablaProps {
     ];
 }
 
+const handleColor = (estado: string) => {
+    switch (estado) {
+        case 'Esperando documentación':
+            return 'orange';
+        case 'En planificación':
+            return 'teal';
+        case 'Esperando aprobación':
+            return 'pink';
+        case 'En fabricación':
+            return 'red';
+        case 'Entregado':
+            return 'green';
+        default:
+            return 'gray';
+    }
+};
+
 const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
     const rows = pacientes.map(
         (element) => (
-            
             // Formatear mejor la fecha
-            (element.updatedAt = new Date(
-                element.updatedAt
-            ).toDateString()),
-
+            (element.updatedAt = new Date(element.updatedAt).toDateString()),
             (
-                <Table.Tr key={element.nombre}>
-                    <Table.Td>
-                        <Badge
-                            color={
-                                // refactorizar mejor 
-                                element.estado === 'Esperando documentación'
-                                    ? 'red'
-                                    : element.estado === 'En planificación'
-                                    ? 'blue'
-                                    : element.estado === 'Finalizado'
-                                    ? 'gray'
-                                    : element.estado === 'En fabricación'
-                                    ? 'green'
-                                    : 'gray'
-                            }
-                        >
+                <TableTr key={element.nombre}>
+                    <TableTd>
+                        <Badge color={handleColor(element.estado)}>
                             {element.estado}
                         </Badge>
-                    </Table.Td>
-                    <Table.Td>
+                    </TableTd>
+                    <TableTd>
                         {element.nombre} {element.apellido}
-                    </Table.Td>
-                    <Table.Td>{element.updatedAt}</Table.Td>
-                    <Table.Td
+                    </TableTd>
+                    <TableTd>{element.updatedAt}</TableTd>
+                    <TableTd
                         style={{
                             display: 'flex',
                             gap: 10,
                         }}
                     >
-                        <Link
+                        <Button
+                            size='xs'
+                            component={Link}
                             href={`/dashboard/pacientes/${element._id}`}
-                            passHref
+                            radius='xl'
                         >
-                            <Button
-                                radius='md'
-                                size='sm'
-                                gradient={{ from: 'blue', to: 'cyan', deg: 97 }}
-                            >
-                                Ver
-                            </Button>
-                        </Link>
-                        {/* <Button variant='light' color='blue' radius='md' size='sm'>
-                    Editar
-                </Button>
-                <Button variant='light' color='pink' radius='md' size='sm'>
-                    Eliminar
-                </Button> */}
-                    </Table.Td>
-                </Table.Tr>
+                            Ver
+                        </Button>
+                        <Button
+                            color='red'
+                            radius='xl'
+                            size='xs'
+                            onClick={() => {
+                                handleDelete(element);
+                            }}
+                        >
+                            Borrar
+                        </Button>
+                    </TableTd>
+                </TableTr>
             )
         )
     );
     return (
         <Table highlightOnHover>
-            <Table.Thead>
-                <Table.Tr>
-                    <Table.Th>Estado</Table.Th>
-                    <Table.Th>Nombre del Paciente</Table.Th>
-                    <Table.Th>Ultima modificación</Table.Th>
-                    <Table.Th>Acciones</Table.Th>
-                </Table.Tr>
-            </Table.Thead>
-            <Table.Tbody>{rows}</Table.Tbody>
+            <TableThead>
+                <TableTr>
+                    <TableTh>Estado</TableTh>
+                    <TableTh>Nombre del Paciente</TableTh>
+                    <TableTh>Ultima modificación</TableTh>
+                    <TableTh>Acciones</TableTh>
+                </TableTr>
+            </TableThead>
+            <TableTbody>{rows}</TableTbody>
         </Table>
     );
 };

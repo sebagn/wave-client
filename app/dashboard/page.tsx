@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Center, Container, Flex } from '@mantine/core';
+import { Button, Container, Flex } from '@mantine/core';
 import Link from 'next/link';
 import PacientesTabla from './components/PacientesTabla.tsx/PacientesTabla';
 

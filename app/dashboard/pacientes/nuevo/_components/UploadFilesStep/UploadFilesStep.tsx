@@ -1,5 +1,5 @@
 import { Button, Container, FileInput, Flex, Stack } from '@mantine/core';
-import React, { use, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { addFiles } from '@services/etapas';
 import { useForm } from '@mantine/form';
@@ -37,7 +37,8 @@ export default function UploadFiles({
 
         form.values.files.forEach(async (file) => {
             const formData = new FormData();
-            formData.append('file', file);
+            formData.append('file', file)
+            ;
             const response = await addFiles(formData, id, module);
             if (response) {
                 console.log('success');

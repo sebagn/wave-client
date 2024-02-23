@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import GrupoFotos from '../GrupoFotos/GrupoFotos';
 import classes from './Paciente.module.css';
+import { BasesModal } from '../BasesModal/BasesModal';
 
 interface PacienteProps {
     _id: string;
@@ -36,10 +37,8 @@ const Paciente = ({
     pac: PacienteProps;
     etapa: EtapaProps;
 }) => {
-
     return (
         <Stack w={'100%'}>
-          
             <div className={classes.container}>
                 <Title order={1} className={classes.title1}>
                     INFORME 2 - ETAPA {etapa.numeroEtapa}
@@ -73,7 +72,6 @@ const Paciente = ({
                     </h3>
                 </div>
             </div>
-
             <Box px={20}>
                 <Group justify='space-evenly'>
                     {etapa.attaches.length > 0 && (
@@ -128,7 +126,7 @@ const Paciente = ({
                     )}
                 </Group>
             </Box>
-              {pac.estado === 'Esperando documentación' && (
+            {pac.estado === 'Esperando documentación' && (
                 <Center>
                     <Button
                         component={Link}
@@ -139,7 +137,9 @@ const Paciente = ({
                     </Button>
                 </Center>
             )}
+            {pac.estado === 'Esperando aprobación' && <BasesModal />}
         </Stack>
     );
 };
+
 export default Paciente;

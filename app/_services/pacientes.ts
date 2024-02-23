@@ -4,7 +4,9 @@ import { urls } from './urls';
 
 export const getPacientes = async () => {
     try {
-        const response = await fetch(urls.pacientes.all);
+        const response = await fetch(urls.pacientes.all, {
+            cache: 'no-store',
+        });
         return response.json();
     } catch (error) {
         console.error(error);
@@ -13,7 +15,9 @@ export const getPacientes = async () => {
 
 export const getPatientById = async (id: string) => {
     try {
-        const response = await fetch(`${urls.pacientes.all}/${id}`);
+        const response = await fetch(`${urls.pacientes.all}/${id}`, {
+            cache: 'no-store',
+        });
         const data = await response.json();
         return data;
     } catch (error) {
@@ -67,4 +71,15 @@ export const updatePaciente = async (id: string, formData: any) => {
     } catch (error) {
         console.error(error);
     }
-}
+};
+
+export const deletePaciente = async (id: string) => {
+    try {
+        const response = await fetch(`${urls.pacientes.all}/${id}`, {
+            method: 'DELETE',
+        });
+        return await response.json();
+    } catch (error) {
+        console.error(error);
+    }
+};

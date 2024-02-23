@@ -12,10 +12,15 @@ import Link from 'next/link';
 import { Group } from '@mantine/core';
 
 const data = [
-    { link: '', label: 'Inicio', icon: IconHome },
-    { link: '/dashboard', label: 'Pacientes', icon: IconClipboardList },
-    { link: '', label: 'Soporte', icon: IconMessage },
-    { link: '', label: 'Profile', icon: IconUser },
+    { link: '', label: 'Inicio', icon: IconHome, disable: true },
+    {
+        link: '/dashboard',
+        label: 'Pacientes',
+        icon: IconClipboardList,
+        disable: false,
+    },
+    { link: '', label: 'Soporte', icon: IconMessage, disable: true },
+    { link: '', label: 'Profile', icon: IconUser, disable: true },
 ];
 
 export function Navbar() {

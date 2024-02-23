@@ -7,6 +7,7 @@ export interface Paciente {
     sexo: string;
     createdAt: string;
     updatedAt: string;
+    etapas: Etapa[];
 }
 
 export interface Etapa {

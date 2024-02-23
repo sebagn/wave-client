@@ -15,13 +15,13 @@ import { addEtapa, createEtapa } from '@services/etapas';
 export default function NuevoPacStep1({ setEtapaId, pac, etapa }) {
     const form = useForm({
         initialValues: {
-            nombre: pac.nombre || '',
-            apellido: pac.apellido || '',
-            dni: pac.dni || '',
-            edad: pac.edad || '',
-            sexo: pac.sexo || '',
-            diagnostico: etapa.diagnostico || '',
-            planTratamiento: etapa.planTratamiento || '',
+            nombre: pac? pac.nombre : '',
+            apellido: pac? pac.apellido : '',
+            dni: pac? pac.dni : '',
+            edad: pac? pac.edad : '',
+            sexo: pac? pac.sexo : '',
+            diagnostico: etapa? etapa.diagnostico : '',
+            planTratamiento: etapa? etapa.planTratamiento : '',
         },
 
         validate: {},

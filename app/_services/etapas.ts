@@ -12,7 +12,9 @@ export const getEtapas = async () => {
 
 export const getEtapaById = async (id: string) => {
     try {
-        const response = await fetch(`${urls.etapas.all}/${id}`);
+        const response = await fetch(`${urls.etapas.all}/${id}`, {
+            cache: 'no-store',
+        });
         const data = await response.json();
         return data;
     } catch (error) {
@@ -81,6 +83,19 @@ export const addFiles = async (
             }
         );
         return response.json();
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+export const deleteEtapas = async (ids: string[]) => {
+    try {
+        ids.forEach(async (id) => {
+            const response = await fetch(`${urls.etapas.all}/${id}`, {
+                method: 'DELETE',
+            });
+            return response.json();
+        });
     } catch (error) {
         console.error(error);
     }
