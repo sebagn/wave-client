@@ -1,5 +1,5 @@
 export const env = {
     api: {
-        url: process.env.host || 'http://localhost:3001'
+        url: process.env.HOST || 'https://wave-server-production.up.railway.app/'
     }
 };
