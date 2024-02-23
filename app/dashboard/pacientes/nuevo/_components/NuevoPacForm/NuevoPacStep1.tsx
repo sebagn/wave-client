@@ -30,7 +30,7 @@ export default function NuevoPacStep1({ setEtapaId, pac, etapa }: any) {
     const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         let etapa;
-
+        console.log(form.values)
         const paciente = !pac
             ? await createPaciente(form.values)
             : await updatePaciente(pac._id, form.values);
