@@ -48,50 +48,54 @@ const handleColor = (estado: string) => {
 };
 
 const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
-    const rows = pacientes?.map(
-        (element) => (
-            // Formatear mejor la fecha
-            (element.updatedAt = new Date(element.updatedAt).toDateString()),
-            (
-                <TableTr key={element.nombre}>
-                    <TableTd>
-                        <Badge color={handleColor(element.estado)}>
-                            {element.estado}
-                        </Badge>
-                    </TableTd>
-                    <TableTd>
-                        {element.nombre} {element.apellido}
-                    </TableTd>
-                    <TableTd>{element.updatedAt}</TableTd>
-                    <TableTd
-                        style={{
-                            display: 'flex',
-                            gap: 10,
-                        }}
-                    >
-                        <Button
-                            size='xs'
-                            component={Link}
-                            href={`/dashboard/pacientes/${element._id}`}
-                            radius='xl'
-                        >
-                            Ver
-                        </Button>
-                        <Button
-                            color='red'
-                            radius='xl'
-                            size='xs'
-                            onClick={() => {
-                                handleDelete(element);
-                            }}
-                        >
-                            Borrar
-                        </Button>
-                    </TableTd>
-                </TableTr>
-            )
-        )
-    );
+    const rows = pacientes
+        ? pacientes.map(
+              (element) => (
+                  // Formatear mejor la fecha
+                  (element.updatedAt = new Date(
+                      element.updatedAt
+                  ).toDateString()),
+                  (
+                      <TableTr key={element.nombre}>
+                          <TableTd>
+                              <Badge color={handleColor(element.estado)}>
+                                  {element.estado}
+                              </Badge>
+                          </TableTd>
+                          <TableTd>
+                              {element.nombre} {element.apellido}
+                          </TableTd>
+                          <TableTd>{element.updatedAt}</TableTd>
+                          <TableTd
+                              style={{
+                                  display: 'flex',
+                                  gap: 10,
+                              }}
+                          >
+                              <Button
+                                  size='xs'
+                                  component={Link}
+                                  href={`/dashboard/pacientes/${element._id}`}
+                                  radius='xl'
+                              >
+                                  Ver
+                              </Button>
+                              <Button
+                                  color='red'
+                                  radius='xl'
+                                  size='xs'
+                                  onClick={() => {
+                                      handleDelete(element);
+                                  }}
+                              >
+                                  Borrar
+                              </Button>
+                          </TableTd>
+                      </TableTr>
+                  )
+              )
+          )
+        : [];
     return (
         <Table highlightOnHover>
             <TableThead>
@@ -102,7 +106,9 @@ const PacientesTablaWrapper = ({ pacientes }: PacientesTablaProps) => {
                     <TableTh>Acciones</TableTh>
                 </TableTr>
             </TableThead>
-            <TableTbody>{pacientes ? rows: <p>No hay pacientes aún.</p>}</TableTbody>
+            <TableTbody>
+                {pacientes ? rows : <p>No hay pacientes aún.</p>}
+            </TableTbody>
         </Table>
     );
 };
